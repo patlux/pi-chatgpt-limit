@@ -1,0 +1,18 @@
+{
+  "name": "pi-chatgpt-limit",
+  "version": "0.1.0",
+  "description": "Show ChatGPT Codex subscription usage in pi's footer",
+  "type": "module",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "chatgpt",
+    "codex"
+  ],
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./extensions/chatgpt-weekly-limit.js"
+    ]
+  }
+}
