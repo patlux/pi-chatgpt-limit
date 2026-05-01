@@ -290,6 +290,22 @@ async function updateUsage(ctx) {
   }
 }
 
+function buildUsageDetails(snapshot, provider) {
+  const lines = [];
+  lines.push(`provider: ${provider}`);
+  lines.push(`plan: ${snapshot?.planType || "unknown"}`);
+  if (snapshot?.email) lines.push(`email: ${snapshot.email}`);
+  lines.push(
+    `5-hour: ${formatUsedPercent(snapshot?.fiveHour)} used, ${formatRemainingPercent(snapshot?.fiveHour)} left, resets ${formatResetLong(snapshot?.fiveHour?.resetAt)}`,
+  );
+  lines.push(
+    `weekly: ${formatUsedPercent(snapshot?.weekly)} used, ${formatRemainingPercent(snapshot?.weekly)} left, resets ${formatResetLong(snapshot?.weekly?.resetAt)}`,
+  );
+  if (snapshot?.fetchedAt) lines.push(`fetched: ${new Date(snapshot.fetchedAt).toLocaleString()}`);
+  lines.push(`endpoint: ${CHATGPT_BASE_URL}/wham/usage`);
+  return lines;
+}
+
 export default function (pi) {
   let inFlight = Promise.resolve();
 
@@ -310,5 +326,23 @@ export default function (pi) {
     if (refreshTimer) clearInterval(refreshTimer);
     refreshTimer = undefined;
     requestRender = () => {};
+  });
+
+  pi.registerCommand("chatgpt-limit", {
+    description: "Show ChatGPT Codex 5-hour and weekly usage limits",
+    handler: async (_args, ctx) => {
+      if (!isOpenAICodexProvider(ctx.model?.provider)) {
+        ctx.ui.notify("ChatGPT limits are only available for openai-codex models.", "info");
+        return;
+      }
+
+      const snapshot = await queueUpdate(ctx);
+      if (!snapshot) {
+        ctx.ui.notify("Could not load ChatGPT usage limits.", "warning");
+        return;
+      }
+
+      await ctx.ui.select("ChatGPT Codex usage limits", buildUsageDetails(snapshot, ctx.model?.provider));
+    },
   });
 }
