@@ -246,10 +246,65 @@ function installFooter(pi, ctx) {
   });
 }
 
+/** @param {import('@mariozechner/pi-coding-agent').ExtensionContext} ctx */
+async function updateUsage(ctx) {
+  const model = ctx.model;
+  if (!isOpenAICodexProvider(model?.provider)) {
+    usageSnapshot = undefined;
+    requestRender();
+    return undefined;
+  }
+
+  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
+  if (!auth.ok || !auth.apiKey) {
+    usageSnapshot = undefined;
+    requestRender();
+    return undefined;
+  }
+
+  const tokenMetadata = getTokenMetadata(auth.apiKey);
+  const headers = {
+    Authorization: `Bearer ${auth.apiKey}`,
+    Accept: "application/json",
+    "User-Agent": "pi-chatgpt-weekly-limit",
+    ...(tokenMetadata.accountId ? { "chatgpt-account-id": tokenMetadata.accountId } : {}),
+  };
+
+  try {
+    const response = await fetch(`${CHATGPT_BASE_URL}/wham/usage`, { headers, signal: AbortSignal.timeout(15000) });
+    if (!response.ok) {
+      usageSnapshot = undefined;
+      requestRender();
+      return undefined;
+    }
+
+    usageSnapshot = parseUsageSnapshot(await response.json());
+    if (!usageSnapshot.email && tokenMetadata.email) usageSnapshot.email = tokenMetadata.email;
+    if (!usageSnapshot.planType && tokenMetadata.planType) usageSnapshot.planType = tokenMetadata.planType;
+    requestRender();
+    return usageSnapshot;
+  } catch {
+    usageSnapshot = undefined;
+    requestRender();
+    return undefined;
+  }
+}
+
 export default function (pi) {
+  let inFlight = Promise.resolve();
+
+  function queueUpdate(ctx) {
+    inFlight = inFlight.catch(() => undefined).then(() => updateUsage(ctx));
+    return inFlight;
+  }
+
   pi.on("session_start", async (_event, ctx) => {
     installFooter(pi, ctx);
+    await queueUpdate(ctx);
   });
+
+  pi.on("model_select", async (_event, ctx) => queueUpdate(ctx));
+  pi.on("agent_end", async (_event, ctx) => queueUpdate(ctx));
 
   pi.on("session_shutdown", async () => {
     if (refreshTimer) clearInterval(refreshTimer);
