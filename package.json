@@ -1,6 +1,6 @@
 {
   "name": "pi-chatgpt-limit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Show ChatGPT Codex subscription usage in pi's footer",
   "type": "module",
   "keywords": [
