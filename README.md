@@ -19,6 +19,12 @@ The screenshots are also referenced from [issue #1](https://github.com/patlux/pi
 ## Install
 
 ```sh
+pi install npm:pi-chatgpt-limit
+```
+
+Or shorthand:
+
+```sh
 pi install pi-chatgpt-limit
 ```
 

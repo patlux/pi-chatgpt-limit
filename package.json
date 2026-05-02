@@ -26,6 +26,7 @@
   "pi": {
     "extensions": [
       "./extensions/chatgpt-weekly-limit.js"
-    ]
+    ],
+    "image": "https://github.com/patlux/pi-chatgpt-limit/releases/download/preview-assets/footer-preview.png"
   }
 }
