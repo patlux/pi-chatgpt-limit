@@ -19,7 +19,7 @@ The screenshots are also referenced from [issue #1](https://github.com/patlux/pi
 ## Install
 
 ```sh
-pi install git:github.com/patlux/pi-chatgpt-limit
+pi install pi-chatgpt-limit
 ```
 
 Then reload pi:
@@ -57,6 +57,13 @@ GET https://chatgpt.com/backend-api/wham/usage
 It uses the OAuth token already stored by pi for the active `openai-codex` provider.
 
 Extensions run with local user permissions and can access pi auth storage. Review extensions before installing them.
+
+## Publish
+
+```sh
+npm login
+npm publish --access public
+```
 
 ## License
 
