@@ -78,12 +78,13 @@ It uses the OAuth token already stored by pi for the active `openai-codex` provi
 
 Extensions run with local user permissions and can access pi auth storage. Review extensions before installing them.
 
-## Publish
+## Contributing
 
-```sh
-npm login
-npm publish --access public
-```
+See [CONTRIBUTING.md](https://github.com/patlux/pi-chatgpt-limit/blob/main/CONTRIBUTING.md) for development setup, PR expectations, and commit message guidance.
+
+## Release
+
+See [RELEASE.md](https://github.com/patlux/pi-chatgpt-limit/blob/main/RELEASE.md) for the release checklist, GitHub release publishing, npm verification, and announcement steps.
 
 ## License
 

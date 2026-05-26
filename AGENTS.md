@@ -4,6 +4,14 @@
 
 `pi-chatgpt-limit` is a pi extension package. It shows ChatGPT Codex usage limits in pi's footer and exposes the `/chatgpt-limit` command.
 
+## Project docs
+
+- Follow [CONTRIBUTING.md](CONTRIBUTING.md) before changing code, tests, docs, or commit messages.
+- Use [RELEASE.md](RELEASE.md) for versioning, npm package, GitHub release, and announcement work.
+- Keep changes focused and reviewable; avoid unrelated refactors.
+- Run the relevant checks before reporting work as done.
+- Do not commit, tag, push, or publish unless explicitly asked in the current conversation.
+
 ## Commands
 
 - Test: `npm test`
