@@ -149,7 +149,7 @@ async function runRealPiTui({
   initialConfig,
   waitFor = (text) => text.includes("42%") && text.includes("gpt-5.5"),
   settleMs = 0,
-  timeoutMs = 8000,
+  timeoutMs = 12000,
 }) {
   if (
     spawnSync("script", ["--version"], { stdio: "ignore" }).error?.code ===
@@ -184,6 +184,8 @@ async function runRealPiTui({
       CHATGPT_BASE_URL: baseUrl,
       PI_CODING_AGENT_DIR: agentDir,
       PI_CODING_AGENT_SESSION_DIR: sessionDir,
+      PI_SKIP_VERSION_CHECK: "1",
+      PI_TELEMETRY: "0",
       TERM: "xterm-256color",
       NO_COLOR: "0",
       COLUMNS: "160",
@@ -221,6 +223,7 @@ async function runRealPiTuiExpect({
   expectedConfig,
   initialConfig,
   scriptBody,
+  readyText = "W 42%",
   settleMs = 100,
   extraEnv = {},
   timeoutMs = 12000,
@@ -251,6 +254,8 @@ async function runRealPiTuiExpect({
     CHATGPT_BASE_URL: baseUrl,
     PI_CODING_AGENT_DIR: agentDir,
     PI_CODING_AGENT_SESSION_DIR: sessionDir,
+    PI_SKIP_VERSION_CHECK: "1",
+    PI_TELEMETRY: "0",
     TERM: "xterm-256color",
     NO_COLOR: "0",
     COLUMNS: "160",
@@ -277,7 +282,8 @@ ${envLines}
 spawn pi ${piArgs}
 set pi_pid [exp_pid]
 stty columns 160 rows 40
-after 1500
+${expectBlock(readyText)}
+after 300
 send "/chatgpt-limit\\r"
 ${body}
 after ${settleMs}
@@ -430,6 +436,7 @@ ${expectBlock("gpt-5.5")}`,
       baseUrl: server.baseUrl,
       apiKey: token,
       initialConfig: { quotaWindow: "both", displayMode: "remainingCompact" },
+      readyText: "W 58% left",
       expectedConfig: defaultConfig,
       scriptBody: `${expectBlock("Reset footer settings to defaults")}
 send "${expectSendLiteral(resetMenu)}"
