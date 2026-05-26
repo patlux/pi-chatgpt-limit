@@ -34,7 +34,7 @@ git diff --check
 
 Aside from npm's required package metadata, the package should include only:
 
-- `extensions/`
+- `index.js`
 - `README.md`
 - `LICENSE`
 
@@ -43,7 +43,7 @@ Aside from npm's required package metadata, the package should include only:
 Only do this after explicit maintainer approval.
 
 ```sh
-git add package.json package-lock.json README.md extensions test types .github CONTRIBUTING.md RELEASE.md AGENTS.md
+git add package.json package-lock.json README.md index.js test types .github CONTRIBUTING.md RELEASE.md AGENTS.md
 git commit -m "Release vX.Y.Z"
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
 ```

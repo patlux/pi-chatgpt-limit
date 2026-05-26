@@ -8,7 +8,7 @@ import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 import { test } from "node:test"
 
-const EXTENSION_PATH = resolve("extensions/chatgpt-weekly-limit.js")
+const EXTENSION_PATH = resolve("index.js")
 
 function encodeBase64Url(value) {
   return Buffer.from(JSON.stringify(value)).toString("base64url")

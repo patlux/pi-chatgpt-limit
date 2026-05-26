@@ -1,6 +1,6 @@
 # pi-chatgpt-limit
 
-A [pi](https://github.com/badlogic/pi-mono) extension that shows your ChatGPT Codex subscription usage inline in the footer.
+A [pi](https://pi.dev) extension that shows your ChatGPT Codex subscription usage inline in the footer.
 
 It displays configurable ChatGPT Pro/Codex usage next to the active Codex model, and provides a command for detailed 5-hour and weekly usage windows.
 

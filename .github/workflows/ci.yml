@@ -15,7 +15,7 @@ jobs:
           node-version: 24
       - run: sudo apt-get update && sudo apt-get install -y expect fd-find ripgrep
       - run: sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd
-      - run: npm install -g @mariozechner/pi-coding-agent@0.73.1
+      - run: npm install -g @earendil-works/pi-coding-agent@0.75.5
       - run: npm ci
       - run: npm run format:check
       - run: npm run typecheck

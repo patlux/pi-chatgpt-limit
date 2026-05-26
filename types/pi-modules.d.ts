@@ -1,4 +1,4 @@
-declare module "@mariozechner/pi-tui" {
+declare module "@earendil-works/pi-tui" {
   export const Key: {
     up: unknown
     down: unknown
@@ -16,7 +16,7 @@ declare module "@mariozechner/pi-tui" {
   export function visibleWidth(text: string): number
 }
 
-declare module "@mariozechner/pi-ai" {
+declare module "@earendil-works/pi-ai" {
   export interface AssistantMessage {
     usage?: {
       input?: number
@@ -30,8 +30,8 @@ declare module "@mariozechner/pi-ai" {
   }
 }
 
-declare module "@mariozechner/pi-coding-agent" {
-  import type { AssistantMessage } from "@mariozechner/pi-ai"
+declare module "@earendil-works/pi-coding-agent" {
+  import type { AssistantMessage } from "@earendil-works/pi-ai"
 
   export interface Theme {
     fg(color: string, text: string): string

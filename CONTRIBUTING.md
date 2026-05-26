@@ -56,7 +56,7 @@ pi --no-extensions \
   --no-prompt-templates \
   --no-themes \
   --no-context-files \
-  --extension ./extensions/chatgpt-weekly-limit.js \
+  --extension ./index.js \
   --provider openai-codex \
   --model gpt-5.5
 ```
@@ -67,7 +67,7 @@ Use isolated `PI_CODING_AGENT_DIR` and `PI_CODING_AGENT_SESSION_DIR` values when
 
 Aside from npm's required package metadata, the published package should include only:
 
-- `extensions/`
+- `index.js`
 - `README.md`
 - `LICENSE`
 

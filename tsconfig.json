@@ -11,5 +11,5 @@
     "strict": false,
     "skipLibCheck": true
   },
-  "include": ["extensions/**/*.js", "types/**/*.d.ts"]
+  "include": ["index.js", "types/**/*.d.ts"]
 }

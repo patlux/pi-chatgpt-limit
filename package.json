@@ -1,6 +1,6 @@
 {
   "name": "pi-chatgpt-limit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Show ChatGPT Codex subscription usage in pi's footer",
   "type": "module",
   "scripts": {
@@ -16,6 +16,9 @@
     "codex"
   ],
   "license": "MIT",
+  "peerDependencies": {
+    "@earendil-works/pi-tui": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patlux/pi-chatgpt-limit.git"
@@ -25,7 +28,7 @@
     "url": "https://github.com/patlux/pi-chatgpt-limit/issues"
   },
   "files": [
-    "extensions",
+    "index.js",
     "README.md",
     "LICENSE"
   ],
@@ -36,7 +39,7 @@
   },
   "pi": {
     "extensions": [
-      "./extensions/chatgpt-weekly-limit.js"
+      "./index.js"
     ],
     "image": "https://github.com/patlux/pi-chatgpt-limit/releases/download/preview-assets/footer-preview.png"
   }

@@ -14,7 +14,7 @@ import {
   matchesKey,
   truncateToWidth,
   visibleWidth,
-} from "@mariozechner/pi-tui"
+} from "@earendil-works/pi-tui"
 
 const CHATGPT_BASE_URL = (
   process.env.CHATGPT_BASE_URL || "https://chatgpt.com/backend-api"
@@ -329,7 +329,7 @@ async function saveFooterConfig(nextConfig) {
   await writeGlobalFooterConfig(footerConfig)
 }
 
-/** @param {import('@mariozechner/pi-ai').AssistantMessage['usage']} usage */
+/** @param {import('@earendil-works/pi-ai').AssistantMessage['usage']} usage */
 function addUsage(total, usage) {
   total.input += usage?.input ?? 0
   total.output += usage?.output ?? 0
@@ -511,7 +511,7 @@ function renderFooter(pi, ctx, footerData, theme, width) {
   return [pwdLine, theme.fg("dim", statsLeft) + theme.fg("dim", remainder)]
 }
 
-/** @param {import('@mariozechner/pi-coding-agent').ExtensionContext} ctx */
+/** @param {import('@earendil-works/pi-coding-agent').ExtensionContext} ctx */
 function installFooter(pi, ctx) {
   ctx.ui.setFooter((tui, theme, footerData) => {
     requestRender = () => tui.requestRender()
@@ -528,7 +528,7 @@ function installFooter(pi, ctx) {
   })
 }
 
-/** @param {import('@mariozechner/pi-coding-agent').ExtensionContext} ctx */
+/** @param {import('@earendil-works/pi-coding-agent').ExtensionContext} ctx */
 async function updateUsage(ctx) {
   const model = ctx.model
   if (!isOpenAICodexProvider(model?.provider)) {
