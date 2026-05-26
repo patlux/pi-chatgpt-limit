@@ -68,6 +68,7 @@ Use isolated `PI_CODING_AGENT_DIR` and `PI_CODING_AGENT_SESSION_DIR` values when
 Aside from npm's required package metadata, the published package should include only:
 
 - `index.js`
+- `src/`
 - `README.md`
 - `LICENSE`
 

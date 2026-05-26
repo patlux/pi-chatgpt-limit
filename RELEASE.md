@@ -35,6 +35,7 @@ git diff --check
 Aside from npm's required package metadata, the package should include only:
 
 - `index.js`
+- `src/`
 - `README.md`
 - `LICENSE`
 
