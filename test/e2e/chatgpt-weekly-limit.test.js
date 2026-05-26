@@ -78,7 +78,13 @@ function scriptCommand(outputFile, command, args) {
 
   return [
     "script",
-    ["-q", "-c", [command, ...args].map(shellQuote).join(" "), outputFile],
+    [
+      "-q",
+      "-f",
+      "-c",
+      [command, ...args].map(shellQuote).join(" "),
+      outputFile,
+    ],
   ]
 }
 
